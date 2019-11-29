@@ -8,8 +8,8 @@ import com.epam.izh.rd.online.entity.SchoolBook;
 public class SimpleSchoolBookService implements BookService {
 
     @Override
-    public boolean save(Book book) {
-
+    public boolean save(SchoolBook book) {
+        authorService.findByFullName(book.getAuthorName(), book.getAuthorLastName());
         return false;
     }
 
