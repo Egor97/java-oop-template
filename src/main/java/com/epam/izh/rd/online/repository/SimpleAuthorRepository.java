@@ -6,39 +6,29 @@ import java.util.Arrays;
 
 public class SimpleAuthorRepository implements AuthorRepository {
 
-    private Author[] authors = new Author[]{};
-
     @Override
     public boolean save(Author author) {
-        Author[] checkLength = Arrays.copyOf(authors, authors.length);
-        int value = authors.length+1;
-        if (authors.length == 0) {
-            authors = new Author[1];
-            authors[0] = author;
+        SimpleAuthorRepository checkAuthor = new SimpleAuthorRepository();
+
+        if (checkAuthor.findByFullName(author.getName(), author.getLastName()) == author) {
+            return false;
         } else {
-            for (int i = 0; i < authors.length; i++){
-                if (authors[i].getName().equals(author.getName()) && authors[i].getLastName().equals(author.getLastName())) {
-                    break;
-                } else {
-                    authors = new Author[value];
-                    for (int j = 0; j < authors.length; j++){
-                        if(authors[j] == null){
-                            authors[j] = author;
-                        }
-                    }
-                }
-            }
+            Author[] arrayForCopy = Arrays.copyOf(authors, authors.length+1);
+            authors = new Author[authors.length+1];
+            authors = Arrays.copyOf(arrayForCopy, arrayForCopy.length);
+            authors[authors.length-1] = author;
+            return true;
         }
-        return !Arrays.equals(checkLength, authors);
     }
 
     @Override
     public Author findByFullName(String name, String lastname) {
-        for (int i = 0; i < authors.length; i++) {
-            if (authors[i].getName().equals(name) && authors[i].getLastName().equals(lastname)) {
-                return authors[i];
+        for (Author element : authors) {
+            if (element.getName().equals(name) && element.getLastName().equals(lastname)) {
+                return element;
             }
         }
+
         return null;
     }
 
@@ -69,4 +59,6 @@ public class SimpleAuthorRepository implements AuthorRepository {
     public int count() {
         return authors.length;
     }
+
+    private Author[] authors = new Author[]{};
 }

@@ -8,19 +8,24 @@ import com.epam.izh.rd.online.entity.SchoolBook;
 public class SimpleSchoolBookService implements BookService {
 
     @Override
-    public boolean save(SchoolBook book) {
-        authorService.findByFullName(book.getAuthorName(), book.getAuthorLastName());
+    public  boolean save(Book book) {
+//        SimpleAuthorService bookAuthor = new SimpleAuthorService();
+//        if (bookAuthor.findByFullName(((SchoolBook) book).getAuthorName(), ((SchoolBook) book).getAuthorLastName()).equals(true) == true){
+//            return schoolBookBookRepository.save((SchoolBook) book);
+//        } else {
+//            return false;
+//        }
         return false;
     }
 
     @Override
     public Book[] findByName(String name) {
-        return new Book[0];
+        return schoolBookBookRepository.findByName(name);
     }
 
     @Override
     public int getNumberOfBooksByName(String name) {
-        return 0;
+        return findByName(name).length;
     }
 
     @Override

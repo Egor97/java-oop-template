@@ -27,10 +27,6 @@ public class SchoolBook extends Book {
     public SchoolBook(){
     }
 
-    public SchoolBook(int numberOfPages, String name) {
-        super(numberOfPages, name);
-    }
-
     public SchoolBook(int numberOfPages, String name, String authorName, String authorLastName, LocalDate publishDate) {
         super(numberOfPages, name);
         this.authorName = authorName;
