@@ -2,12 +2,9 @@ package com.epam.izh.rd.online;
 
 import com.epam.izh.rd.online.entity.Author;
 import com.epam.izh.rd.online.repository.SimpleAuthorRepository;
-import com.epam.izh.rd.online.service.AuthorService;
-import com.epam.izh.rd.online.service.SimpleAuthorService;
 
 import java.time.LocalDate;
 
-import static java.lang.System.console;
 import static java.lang.System.out;
 
 public class Main {
@@ -20,17 +17,19 @@ public class Main {
         SimpleAuthorRepository author1 = new SimpleAuthorRepository();
 
         out.println(author1.save(authorFirst));
+        out.println("-------------");
         out.println(author1.findByFullName(authorFirst.getName(), authorFirst.getLastName()));
         out.println(author1.findByFullName(authorSecond.getName(), authorSecond.getLastName()));
         out.println(author1.count());
         out.println(author1.save(authorThird));
-//        author1.countInArray();
+        out.println("-------------");
         out.println(author1.findByFullName(authorThird.getName(), authorThird.getLastName()));
         out.println(author1.count());
         out.println(author1.save(authorSecond));
+        out.println("-------------");
         out.println(author1.findByFullName(authorSecond.getName(), authorSecond.getLastName()));
         out.println(author1.count());
-//        author1.countInArray();
+
 
     }
 
