@@ -8,26 +8,48 @@ public class SimpleAuthorRepository implements AuthorRepository {
 
     @Override
     public boolean save(Author author) {
-        SimpleAuthorRepository checkAuthor = new SimpleAuthorRepository();
-
-        if (checkAuthor.findByFullName(author.getName(), author.getLastName()) == author) {
-            return false;
+        int countPropInArray = authors.length;
+        System.out.println(Arrays.toString(authors));
+        System.out.println(author.getName() + " " + author.getLastName());
+        if (authors.length == 0 ) {
+            authors = new Author[1];
+            authors[0] = author;
         } else {
-            Author[] arrayForCopy = Arrays.copyOf(authors, authors.length+1);
-            authors = new Author[authors.length+1];
-            authors = Arrays.copyOf(arrayForCopy, arrayForCopy.length);
+            for (int i = 0; i < authors.length; i++) {
+                if (authors[i].getName().equals(author.getName()) && authors[i].getLastName().equals(author.getLastName())) {
+                    break;
+                } else {
+                    authors = new Author[countPropInArray + 1];
+                }
+            }
+        }
+
+//        authors
+        Author[] arraysForCopy = Arrays.copyOf(authors, authors.length);
+
+//        System.out.println(Arrays.toString(arraysForCopy));
+//        authors =  Arrays.copyOf(arraysForCopy, arraysForCopy.length)
+//        System.out.println(Arrays.toString(authors));
+        if (authors.length != countPropInArray) {
             authors[authors.length-1] = author;
             return true;
         }
+
+        return false;
     }
 
     @Override
     public Author findByFullName(String name, String lastname) {
-        for (Author element : authors) {
-            if (element.getName().equals(name) && element.getLastName().equals(lastname)) {
-                return element;
+        for (int i = 0; i < authors.length; i++) {
+            if (authors[i].getName().equals(name) && authors[i].getLastName().equals(lastname)) {
+                return authors[i];
             }
         }
+//        for (Author element : authors) {
+//            if (element.getName().equals(name) && element.getLastName().equals(lastname)) {
+//                return element;
+//            }
+//        }
 
         return null;
     }
@@ -54,6 +76,10 @@ public class SimpleAuthorRepository implements AuthorRepository {
             return false;
         }
     }
+
+//    public void countInArray(){
+//        System.out.println(Arrays.toString(authors));
+//    }
 
     @Override
     public int count() {

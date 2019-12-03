@@ -4,10 +4,8 @@ import com.epam.izh.rd.online.entity.Author;
 import com.epam.izh.rd.online.repository.SimpleAuthorRepository;
 import com.epam.izh.rd.online.service.AuthorService;
 import com.epam.izh.rd.online.service.SimpleAuthorService;
-import sun.java2d.pipe.SpanShapeRenderer;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 
 import static java.lang.System.console;
 import static java.lang.System.out;
@@ -26,11 +24,13 @@ public class Main {
         out.println(author1.findByFullName(authorSecond.getName(), authorSecond.getLastName()));
         out.println(author1.count());
         out.println(author1.save(authorThird));
+//        author1.countInArray();
         out.println(author1.findByFullName(authorThird.getName(), authorThird.getLastName()));
         out.println(author1.count());
         out.println(author1.save(authorSecond));
         out.println(author1.findByFullName(authorSecond.getName(), authorSecond.getLastName()));
         out.println(author1.count());
+//        author1.countInArray();
 
     }
 
