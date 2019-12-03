@@ -29,6 +29,7 @@ public class Main {
         out.println("-------------");
         out.println(author1.findByFullName(authorSecond.getName(), authorSecond.getLastName()));
         out.println(author1.count());
+        author1.valueOfArray();
 
 
     }

@@ -60,6 +60,10 @@ public class SimpleAuthorRepository implements AuthorRepository {
         }
     }
 
+    public void valueOfArray() {
+        System.out.println(Arrays.toString(authors));
+    }
+
     @Override
     public int count() {
         return authors.length;
