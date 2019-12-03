@@ -43,21 +43,36 @@ public class SimpleAuthorRepository implements AuthorRepository {
         int valueOfIndexArray = 0;
 
         for (int i = 0; i < authors.length; i++) {
-            if (authors[i].getName().equals(author.getName()) && authors[i].getLastName().equals(author.getLastName())) {
+            if (author.getName().equals(authors[i].getName()) && author.getLastName().equals(authors[i].getLastName())) {
                 valueOfIndexArray = i;
                 authors[i] = null;
-                checkLength = new Author[authors.length-1];
             }
         }
 
-        if (!Arrays.equals(checkLength, authors)) {
-            for (int i = valueOfIndexArray; i < authors.length-1; i++){
-                authors[i-1] = authors[i];
+        if (!Arrays.equals(authors, checkLength)) {
+            if (valueOfIndexArray != 0) {
+                for (int i = valueOfIndexArray; i < authors.length - 1; i++){
+                    authors[i-1] = authors[i];
+                }
+
+                authors = new Author[authors.length - 1];
+                authors = Arrays.copyOf(checkLength, authors.length);
+
+                return true;
+            } else {
+                for (int j = 0; j < authors.length / 2; j++) {
+                    Author element = authors[j];
+                    authors[j] = authors[authors.length -j -1];
+                    authors[authors.length -j -1] = element;
+                }
+
+                authors = new Author[authors.length - 1];
+                authors = Arrays.copyOf(checkLength, authors.length);
+
+                return true;
             }
-            return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public void valueOfArray() {

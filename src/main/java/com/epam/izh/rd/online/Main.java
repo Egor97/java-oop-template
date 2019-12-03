@@ -17,20 +17,10 @@ public class Main {
         SimpleAuthorRepository author1 = new SimpleAuthorRepository();
 
         out.println(author1.save(authorFirst));
-        out.println("-------------");
-        out.println(author1.findByFullName(authorFirst.getName(), authorFirst.getLastName()));
-        out.println(author1.findByFullName(authorSecond.getName(), authorSecond.getLastName()));
-        out.println(author1.count());
-        out.println(author1.save(authorThird));
-        out.println("-------------");
-        out.println(author1.findByFullName(authorThird.getName(), authorThird.getLastName()));
-        out.println(author1.count());
         out.println(author1.save(authorSecond));
-        out.println("-------------");
-        out.println(author1.findByFullName(authorSecond.getName(), authorSecond.getLastName()));
         out.println(author1.count());
-        author1.valueOfArray();
-
+        out.println(author1.remove(authorThird));
+        out.println(author1.count());
 
     }
 
