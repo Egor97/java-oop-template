@@ -2,52 +2,92 @@ package com.epam.izh.rd.online.repository;
 
 import com.epam.izh.rd.online.entity.SchoolBook;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class SimpleSchoolBookRepository implements BookRepository<SchoolBook> {
 
     @Override
     public boolean save(SchoolBook book) {
-        SchoolBook[] schoolBooksSaving = schoolBooks.clone();
+        if (schoolBooks.length == 0) {
+            schoolBooks = new SchoolBook[1];
+            schoolBooks[0] = book;
+        } else {
+            schoolBooks = Arrays.copyOf(schoolBooks, schoolBooks.length + 1);
+            schoolBooks[schoolBooks.length - 1] = book;
+        }
 
-        schoolBooks = new SchoolBook[schoolBooks.length + 1];
-        schoolBooks[schoolBooks.length - 1] = book;
-
-        return !Arrays.equals(schoolBooksSaving, schoolBooks);
+        return true;
     }
 
     @Override
     public SchoolBook[] findByName(String name) {
-        int value = 0;
-        SchoolBook[] findBooksByName = new SchoolBook[]{};
-        for (int i = 0; i < schoolBooks.length; i++) {
-            if (schoolBooks[i].getName().equals(name)) {
-                value += 1;
-                findBooksByName = new SchoolBook[value];
-                findBooksByName[value-1] = schoolBooks[i];
+        int neededBooksInArray = 0;
+        SchoolBook neededBook = null;
+
+        for (SchoolBook element : schoolBooks) {
+            if (name.equals(element.getName())) {
+                neededBooksInArray += 1;
+                neededBook = element;
             }
         }
-        return findBooksByName;
+
+        SchoolBook[] arrayForSend = new SchoolBook[neededBooksInArray];
+
+        if (neededBooksInArray != 0) {
+            Arrays.fill(arrayForSend, neededBook);
+        }
+
+        return arrayForSend;
     }
 
     @Override
     public boolean removeByName(String name) {
-        int key = Arrays.binarySearch(schoolBooks, name);
+        int booksForRemove = 0;
+        SchoolBook bookForSearchInArray = null;
 
-        if (key == -1) {
-            return false;
-        } else {
-            schoolBooks[key] = null;
-            for (int i = key; i < schoolBooks.length; i++) {
-                schoolBooks[key -1] = schoolBooks[key];
+        for (SchoolBook element : schoolBooks) {
+            if (name.equals(element.getName())) {
+                booksForRemove += 1;
+                bookForSearchInArray = element;
             }
+        }
+
+        if (booksForRemove != 0) {
+            if (booksForRemove == schoolBooks.length) {
+                schoolBooks = new SchoolBook[]{};
+            } else {
+                for (int i = 0; i < schoolBooks.length; i++) {
+                    if (bookForSearchInArray.equals(schoolBooks[i])) {
+                        schoolBooks[i] = null;
+                    }
+                }
+
+                for (int j = 0; j < schoolBooks.length; j++) {
+                    if (schoolBooks[j] == null) {
+                        for (int l = j + 1; l < schoolBooks.length; l++) {
+                            schoolBooks[l - 1] = schoolBooks[l];
+                            schoolBooks[l] = null;
+                        }
+                    }
+                }
+
+                schoolBooks = Arrays.copyOf(schoolBooks, schoolBooks.length - booksForRemove);
+            }
+
             return true;
         }
+
+        return false;
     }
 
     @Override
     public int count() {
-        return 0;
+        return schoolBooks.length;
+    }
+
+    public void valuesOfArray() {
+        System.out.println(Arrays.toString(schoolBooks));
     }
 
     private SchoolBook[] schoolBooks = new SchoolBook[]{};

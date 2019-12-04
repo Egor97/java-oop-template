@@ -80,6 +80,6 @@ public class SchoolBook extends Book {
                 "authorName='" + authorName + '\'' +
                 ", authorLastName='" + authorLastName + '\'' +
                 ", publishDate=" + publishDate +
-                '}';
+                "} " + super.toString();
     }
 }

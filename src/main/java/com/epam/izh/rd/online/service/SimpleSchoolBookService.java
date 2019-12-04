@@ -9,12 +9,9 @@ public class SimpleSchoolBookService implements BookService {
 
     @Override
     public  boolean save(Book book) {
-//        SimpleAuthorService bookAuthor = new SimpleAuthorService();
-//        if (bookAuthor.findByFullName(((SchoolBook) book).getAuthorName(), ((SchoolBook) book).getAuthorLastName()).equals(true) == true){
-//            return schoolBookBookRepository.save((SchoolBook) book);
-//        } else {
-//            return false;
-//        }
+        if (authorService.findByFullName(((SchoolBook) book).getAuthorName(), ((SchoolBook) book).getAuthorLastName()) != null) {
+            return schoolBookBookRepository.save((SchoolBook) book);
+        }
         return false;
     }
 
@@ -35,7 +32,7 @@ public class SimpleSchoolBookService implements BookService {
 
     @Override
     public int count() {
-        return 0;
+        return schoolBookBookRepository.count();
     }
 
     @Override

@@ -20,8 +20,7 @@ public class SimpleAuthorRepository implements AuthorRepository {
                 }
             }
 
-            Author[] arrayForCopy = Arrays.copyOf(authors, authors.length + 1);
-            authors = Arrays.copyOf(arrayForCopy, arrayForCopy.length);
+            authors = Arrays.copyOf(authors, authors.length + 1);
             authors[authors.length - 1] = author;
             return true;
         }
@@ -73,10 +72,6 @@ public class SimpleAuthorRepository implements AuthorRepository {
             }
         }
         return false;
-    }
-
-    public void valueOfArray() {
-        System.out.println(Arrays.toString(authors));
     }
 
     @Override
