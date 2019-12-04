@@ -2,7 +2,6 @@ package com.epam.izh.rd.online.repository;
 
 import com.epam.izh.rd.online.entity.SchoolBook;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class SimpleSchoolBookRepository implements BookRepository<SchoolBook> {
@@ -84,10 +83,6 @@ public class SimpleSchoolBookRepository implements BookRepository<SchoolBook> {
     @Override
     public int count() {
         return schoolBooks.length;
-    }
-
-    public void valuesOfArray() {
-        System.out.println(Arrays.toString(schoolBooks));
     }
 
     private SchoolBook[] schoolBooks = new SchoolBook[]{};

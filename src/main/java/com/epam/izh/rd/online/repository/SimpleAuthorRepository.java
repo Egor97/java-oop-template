@@ -12,6 +12,7 @@ public class SimpleAuthorRepository implements AuthorRepository {
         if (authors.length == 0) {
             authors = new Author[1];
             authors[authors.length-1] = author;
+
             return true;
         } else {
             for (int i = 0; i < authors.length; i++) {
@@ -22,6 +23,7 @@ public class SimpleAuthorRepository implements AuthorRepository {
 
             authors = Arrays.copyOf(authors, authors.length + 1);
             authors[authors.length - 1] = author;
+
             return true;
         }
     }
@@ -33,6 +35,7 @@ public class SimpleAuthorRepository implements AuthorRepository {
                 return element;
             }
         }
+
     return null;
     }
 
@@ -71,6 +74,7 @@ public class SimpleAuthorRepository implements AuthorRepository {
                 return true;
             }
         }
+
         return false;
     }
 
